@@ -4,12 +4,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
-//import com.fasterxml.jackson;
 
 class InputProcessor {
 
     /*
     * Process the input args: help, insert or a query
+    * Added exception handle for call to processJSONFile(arg)
     * */
     void validateInput(String[] args) {
 
@@ -32,6 +32,7 @@ class InputProcessor {
 
     /*
     * Validate insert command: insert <path-to-file>
+    * Added exception handle for call to processJSONFile(arg)
     * */
     private void validateInsert(String[] args) {
 
@@ -48,6 +49,8 @@ class InputProcessor {
 
     /*
     * Process inserted path to JSON file
+    * If I add exception handling in JacksonObjectMapper().processJSONFile(arg)
+    * I have to do this for all invoking methods also...¿ It's a good practice?
     * */
     private void processInsert(String arg) {
 
@@ -58,8 +61,9 @@ class InputProcessor {
             return;
 
         }
+        new JacksonObjectMapper().processJSONFile(arg);
 
-        openFile(arg);
+        //openFile(arg);
 
     }
 

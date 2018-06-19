@@ -1,3 +1,5 @@
+package co.org.osso.databasic;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

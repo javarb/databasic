@@ -1,4 +1,4 @@
-import java.io.IOException;
+package co.org.osso.databasic;
 
 public class Main {
 

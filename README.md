@@ -31,7 +31,7 @@
 
 ## DESIGN 
 
-### Insert
+### co.org.osso.databasic.Insert
 About the input the software must:
 
 - In the main method, open the JSON file provided in the path considering the following:
@@ -53,7 +53,7 @@ This is an JSON sample of the datatypes we are going to be using:
 }
 ```
 
-### Query
+### co.org.osso.databasic.Query
 When there is a query:
 
 - In main method, read the given query provided in the CLI considering the following:

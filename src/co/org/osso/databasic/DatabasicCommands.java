@@ -1,3 +1,5 @@
+package co.org.osso.databasic;
+
 // https://stackoverflow.com/a/19894176
 enum DataBasicCommands {
     // Enums always would be uppercase (see comment in GitHub)

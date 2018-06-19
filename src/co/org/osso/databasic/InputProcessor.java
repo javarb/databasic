@@ -1,3 +1,5 @@
+package co.org.osso.databasic;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -49,7 +51,7 @@ class InputProcessor {
 
     /*
     * Process inserted path to JSON file
-    * If I add exception handling in JacksonObjectMapper().processJSONFile(arg)
+    * If I add exception handling in co.org.osso.databasic.JacksonObjectMapper().processJSONFile(arg)
     * I have to do this for all invoking methods also...¿ It's a good practice?
     * */
     private void processInsert(String arg) {

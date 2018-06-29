@@ -7,13 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-class InputProcessor {
+// For use a class in another package
+import co.org.osso.databasic.query.Query;
+
+class InputProcessorStream {
 
     /*
     * Process the input args: help, insert or a query
-    * Added exception handle for call to processJSONFile(arg)
     * */
     void validateInput(String[] args) {
+
+        // Check commands
+        if (args[0].equals(DataBasicCommands.HELP.toString())) {
+            help();
+            return;
+        }
 
         if (args[0].equals(DataBasicCommands.INSERT.toString())) {
             validateInsert(args);
@@ -28,7 +36,6 @@ class InputProcessor {
 
     /*
     * Validate insert command: insert <path-to-file>
-    * Added exception handle for call to processJSONFile(arg)
     * */
     private void validateInsert(String[] args) {
 
@@ -36,9 +43,8 @@ class InputProcessor {
             processInsert(args[1]);
 
         } else {
-            throw new RuntimeException("Error: You have to provide a path to JSON file");
-           /* System.err.println("Error: You have to provide a path to JSON file");
-            help();*/
+            System.err.println("Error: You have to provide a path to JSON file");
+            help();
 
         }
 
@@ -46,21 +52,18 @@ class InputProcessor {
 
     /*
     * Process inserted path to JSON file
-    * If I add exception handling in co.org.osso.databasic.JacksonObjectMapper().processJSONFile(arg)
-    * I have to do this for all invoking methods also...¿ It's a good practice?
     * */
     private void processInsert(String arg) {
 
         // Corner case: Provided file is empty ""
         if (arg.isEmpty()) {
-            throw new RuntimeException("Error: The provided path is empty");
-            /*System.err.println("Error: The provided path is empty");
+            System.err.println("Error: The provided path is empty");
             help();
-            return;*/
-        }
-        new JacksonObjectMapper().processJSONFile(arg);
+            return;
 
-        //openFile(arg);
+        }
+
+        openFile(arg);
 
     }
 
@@ -107,7 +110,7 @@ class InputProcessor {
     /*
     * Shows help
     * */
-    /*private void help() {
+    private void help() {
 
         String insertCommand = makeBold(DataBasicCommands.INSERT.name() + " <path-to-file>") + "    Inserts an registry into databasic.";
         String queryCommand = makeBold("<id> <json-path>") + "         Executes a query to databasic.";
@@ -122,17 +125,17 @@ class InputProcessor {
         System.out.println(helpCommand);
         System.out.println("-------------------");
 
-    }*/
+    }
 
     /*
     * Format text in bold
     * */
-    /*private String makeBold(String s) {
+    private String makeBold(String s) {
 
         String boldedString = "\u001B[1m";
         boldedString += s + "\u001B[0m";
         return boldedString;
 
-    }*/
+    }
 
 }

@@ -21,6 +21,7 @@ public class JacksonObjectMapper {
              rootNode = objectMapper.readTree(openJSONFile(jsonFile));
 
         } catch (IOException e) {
+            // throw finishes execution is returning bubbling
             throw new RuntimeException(e);
             /*System.err.println("Error: cannot open file: " + jsonFile);
             e.printStackTrace();

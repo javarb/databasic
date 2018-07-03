@@ -28,7 +28,6 @@ class Application{
         * why I not need to return anymore from inside try/catch blocks in JacksonObject mapper, etc?
         * I catch all errors here?
         * Handling all errors here
-        * 
         * */
         // Validate input
         try {

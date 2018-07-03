@@ -11,9 +11,10 @@ class Application{
 
     }
 
-    /*
-     * Process arguments and handle errors/debug display
-     * */
+    /**
+     * Something
+     * @param args
+     */
     void processInput(String[] args){
 
         // Check commands
@@ -26,6 +27,8 @@ class Application{
         /* Questions:
         * why I not need to return anymore from inside try/catch blocks in JacksonObject mapper, etc?
         * I catch all errors here?
+        * Handling all errors here
+        * 
         * */
         // Validate input
         try {
@@ -40,7 +43,10 @@ class Application{
                 help();
 
             }
+        } finally {
+            // The finally has a Gotcha (is something subtle - usually found errors here)
         }
+
     }
 
     /*

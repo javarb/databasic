@@ -1,19 +1,13 @@
 package co.org.osso.databasic;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
-
 class InputProcessor {
 
     /*
     * Process the input args: help, insert or a query
-    * Added exception handle for call to processJSONFile(arg)
     * */
     void validateInput(String[] args) {
+
+        // TODO: Validate empty string
 
         if (args[0].equals(DataBasicCommands.INSERT.toString())) {
             validateInsert(args);
@@ -28,10 +22,8 @@ class InputProcessor {
 
     /*
     * Validate insert command: insert <path-to-file>
-    * Added exception handle for call to processJSONFile(arg)
     * */
     private void validateInsert(String[] args) {
-
         if (args.length == 2) {
             processInsert(args[1]);
 
@@ -39,15 +31,11 @@ class InputProcessor {
             throw new RuntimeException("Error: You have to provide a path to JSON file");
            /* System.err.println("Error: You have to provide a path to JSON file");
             help();*/
-
         }
-
     }
 
     /*
     * Process inserted path to JSON file
-    * If I add exception handling in co.org.osso.databasic.JacksonObjectMapper().processJSONFile(arg)
-    * I have to do this for all invoking methods also...¿ It's a good practice?
     * */
     private void processInsert(String arg) {
 
@@ -58,81 +46,8 @@ class InputProcessor {
             help();
             return;*/
         }
+
         new JacksonObjectMapper().processJSONFile(arg);
 
-        //openFile(arg);
-
     }
-
-    /*
-    * Open JSON file in given path
-    * For the moment this calls the method to put into an ArrayList
-    * and print in console
-    * TODO: Load the file to a single line from the beginning (now doing it in several steps)
-    * */
-    private void openFile(String fileName) {
-
-        String jsonFile = "";
-
-        try {
-            List<String> lines = getLines(fileName);
-            for (String line : lines) {
-                jsonFile += line;
-
-            }
-            System.out.println("jsonFile = " + jsonFile);
-
-        } catch (IOException io) {
-            System.err.println("Error: cannot open file: " + fileName);
-            io.printStackTrace();
-        }
-
-    }
-
-    /*
-    * Save lines into an ArrayList List
-    * */
-    private List<String> getLines(String fileName) throws IOException {
-
-        Stream<String> linesStream = Files.lines(Paths.get(fileName));
-        List<String> lines = new ArrayList<>();
-
-        System.out.println("<!-----Read all lines as a Stream-----!>");
-        linesStream.forEach(s -> lines.add(s));
-        linesStream.close();
-        return lines;
-
-    }
-
-    /*
-    * Shows help
-    * */
-    /*private void help() {
-
-        String insertCommand = makeBold(DataBasicCommands.INSERT.name() + " <path-to-file>") + "    Inserts an registry into databasic.";
-        String queryCommand = makeBold("<id> <json-path>") + "         Executes a query to databasic.";
-        String helpCommand = makeBold("help") + "                     Displays this help and exit";
-
-        System.out.println("\nDatabasic");
-        System.out.println("-------------------");
-        System.out.println("Available commands are:");
-        System.out.println(java.util.Arrays.asList(DataBasicCommands.values()) + "\n");
-        System.out.println(insertCommand);
-        System.out.println(queryCommand);
-        System.out.println(helpCommand);
-        System.out.println("-------------------");
-
-    }*/
-
-    /*
-    * Format text in bold
-    * */
-    /*private String makeBold(String s) {
-
-        String boldedString = "\u001B[1m";
-        boldedString += s + "\u001B[0m";
-        return boldedString;
-
-    }*/
-
 }

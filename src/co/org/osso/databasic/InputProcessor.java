@@ -2,9 +2,10 @@ package co.org.osso.databasic;
 
 class InputProcessor {
 
-    /*
-    * Process the input args: help, insert or a query
-    * */
+    /**
+     * Process the input args: help, insert or a query
+     * @param args
+     */
     void validateInput(String[] args) {
 
         // TODO: Validate empty string
@@ -20,9 +21,10 @@ class InputProcessor {
 
     }
 
-    /*
-    * Validate insert command: insert <path-to-file>
-    * */
+    /**
+     * Validate insert command: insert <path-to-file>
+     * @param args
+     */
     private void validateInsert(String[] args) {
         if (args.length == 2) {
             processInsert(args[1]);
@@ -34,9 +36,10 @@ class InputProcessor {
         }
     }
 
-    /*
-    * Process inserted path to JSON file
-    * */
+    /**
+     * Process inserted path to JSON file
+     * @param arg
+     */
     private void processInsert(String arg) {
 
         // Corner case: Provided file is empty ""

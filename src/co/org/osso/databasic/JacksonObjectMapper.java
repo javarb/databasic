@@ -9,9 +9,11 @@ import java.nio.file.Paths;
 
 public class JacksonObjectMapper {
 
-    /*
-    * Processing JSON file
-    * */
+
+    /**
+     * Processing JSON file
+     * @param jsonFile The file provided in path
+     */
     public void processJSONFile (String jsonFile) {
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -21,7 +23,6 @@ public class JacksonObjectMapper {
              rootNode = objectMapper.readTree(openJSONFile(jsonFile));
 
         } catch (IOException e) {
-            // throw finishes execution is returning bubbling
             throw new RuntimeException(e);
             /*System.err.println("Error: cannot open file: " + jsonFile);
             e.printStackTrace();
@@ -34,13 +35,15 @@ public class JacksonObjectMapper {
         System.out.println("ageNode.asInt() = " + ageNode.asInt());
     }
 
-    /*
-    * Open the JSON File with ObjectMapper readTree() and look for fields to validate
-    * */
+    /**
+     * Open the JSON File with ObjectMapper readTree() and look for fields to validate
+     * @param jsonFile The file provided in path
+     * @return the JSON data
+     */
     private byte[] openJSONFile(String jsonFile) {
 
         byte[] jsonData = new byte[0];
-        ObjectMapper objectMapper = new ObjectMapper();
+        //ObjectMapper objectMapper = new ObjectMapper();
 
         try {
             jsonData = Files.readAllBytes(Paths.get(jsonFile));

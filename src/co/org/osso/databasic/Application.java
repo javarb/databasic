@@ -2,9 +2,10 @@ package co.org.osso.databasic;
 
 class Application{
 
-    /*
+    /**
      * Init application
-     * */
+     * @param args
+     */
     protected void init(String[] args){
 
         processInput(args);
@@ -24,12 +25,7 @@ class Application{
 
         }
 
-        /* Questions:
-        * why I not need to return anymore from inside try/catch blocks in JacksonObject mapper, etc?
-        * I catch all errors here?
-        * Handling all errors here
-        * */
-        // Validate input
+        // Validate input, Handling all errors here
         try {
             new InputProcessor().validateInput(args);
 
@@ -48,9 +44,9 @@ class Application{
 
     }
 
-    /*
+    /**
      * Shows help
-     * */
+     */
     private void help() {
 
         String insertCommand = makeBold(DataBasicCommands.INSERT.name() + " <path-to-file>") + "    Inserts an registry into databasic.";
@@ -68,9 +64,11 @@ class Application{
 
     }
 
-    /*
+    /**
      * Format text in bold
-     * */
+     * @param s The string to bold
+     * @return The emboldened text
+     */
     private String makeBold(String s) {
         String boldedString = "\u001B[1m";
         boldedString += s + "\u001B[0m";

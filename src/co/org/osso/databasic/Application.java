@@ -27,7 +27,9 @@ class Application{
 
         // Validate input, Handling all errors here
         try {
-            new InputProcessor().validateInput(args);
+            InputProcessor processor = new InputProcessor();
+            processor.validateInput(args);
+            processor.processInput(args);
 
         } catch (RuntimeException e) {
             if ("debug".equals(args[args.length - 1])){
@@ -38,10 +40,7 @@ class Application{
                 help();
 
             }
-        } finally {
-            // The finally has a Gotcha (is something subtle - usually found errors here)
         }
-
     }
 
     /**

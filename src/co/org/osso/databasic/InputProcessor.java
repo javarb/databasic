@@ -11,7 +11,9 @@ class InputProcessor {
         // TODO: Validate empty string
 
         if (args[0].equals(DataBasicCommands.INSERT.toString())) {
-            validateInsert(args);
+            if (args.length != 2) {
+                throw new RuntimeException("Error: You have to provide a path to JSON file");
+            }
             return;
         }
 
@@ -19,21 +21,6 @@ class InputProcessor {
         // TODO: Validate and process the query
         System.out.println("Querying...");
 
-    }
-
-    /**
-     * Validate insert command: insert <path-to-file>
-     * @param args
-     */
-    private void validateInsert(String[] args) {
-        if (args.length == 2) {
-            processInsert(args[1]);
-
-        } else {
-            throw new RuntimeException("Error: You have to provide a path to JSON file");
-           /* System.err.println("Error: You have to provide a path to JSON file");
-            help();*/
-        }
     }
 
     /**
@@ -52,5 +39,9 @@ class InputProcessor {
 
         new JacksonObjectMapper().processJSONFile(arg);
 
+    }
+
+    public void processInput(String[] args) {
+        processInsert(args[1]);
     }
 }

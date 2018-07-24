@@ -8,7 +8,7 @@
 1. Data should be inserted into a database that will be persisted.
 1. The software should allow to query the database according to the following structure:
 	```shell
-	databasic <id> <json-path>
+	databasic query <id> <json-path>
 	``` 
 	Where `<id>` is a number and `<json-path>` is of the form `“a.b”`
 1. The ID field of the database will be an odd integer number greater than or equal to 1.
@@ -57,9 +57,10 @@ This is an JSON sample of the datatypes we are going to be using:
 When there is a query:
 
 - In main method, read the given query provided in the CLI considering the following:
-	- Validate the number of parameters received be 2, ignoring others and/or returning an error message to the user.
-	- Validate the first given parameter "ID" corresponds to a number (odd positive integer).
-	- Validate the second given parameter "JSON PATH" be in the form “a.b”, else print an error message to the user.	
+	- Validate the number of parameters received be 3, ignoring others and/or returning an error message to the user.
+	- Validate the first given parameter be "query".
+	- Validate the second given parameter "ID" corresponds to a number (odd positive integer).
+	- Validate the third given parameter "JSON PATH" be in the form “a.b”, else print an error message to the user.	
 - Open the databasic JSON file, if there is some error print an error message to the user.
 - Make a search in the JSON document using the given ID (first parameter) and JSON PATH.
 - Print the query result to the user.
@@ -81,7 +82,7 @@ Having the following JSON Document:
 
 The query:
 ```shell
-databasic 1 person.name
+databasic query 1 person.name
 ```
 
 Returns:

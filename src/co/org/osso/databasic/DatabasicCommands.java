@@ -1,9 +1,11 @@
 package co.org.osso.databasic;
 
-// https://stackoverflow.com/a/19894176
+/**
+ *     Enums always would be uppercase (see comment in GitHub)
+ *     https://stackoverflow.com/a/19894176
+ */
 enum DataBasicCommands {
-    // Enums always would be uppercase (see comment in GitHub)
-    INSERT, HELP;
+    INSERT, QUERY, HELP;
 
     // Type toString and tab/enter
     @Override

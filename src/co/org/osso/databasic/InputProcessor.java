@@ -2,46 +2,85 @@ package co.org.osso.databasic;
 
 class InputProcessor {
 
+    InputProcessor(String[] args) {
+
+        processInput(args);
+
+    }
+
     /**
-     * Process the input args: help, insert or a query
+     * Process input validating args: Help, insert or query
      * @param args
      */
-    void validateInput(String[] args) {
-
-        // TODO: Validate empty string
+    void processInput(String[] args) {
 
         if (args[0].equals(DataBasicCommands.INSERT.toString())) {
             if (args.length != 2) {
                 throw new RuntimeException("Error: You have to provide a path to JSON file");
-            }
-            return;
-        }
 
-        // Default, make a query
-        // TODO: Validate and process the query
-        System.out.println("Querying...");
+            } else if (args[1].isEmpty()) {
+                throw new RuntimeException("Error: The provided path is empty");
+
+            }
+
+            new JacksonObjectMapper().processJSONFile(args[1]);
+
+
+        } else if (args[0].equals(DataBasicCommands.QUERY.toString())){
+            if (args.length != 3) {
+                throw new RuntimeException("Error: A valid query needs to have 3 arguments");
+
+            } else if (args[1].isEmpty()) {
+                throw new RuntimeException("Error: The provided query is empty");
+
+            } else if (args[2].isEmpty()) {
+                throw new RuntimeException("Error: You must to provide a valid JSON path");
+
+            }
+
+            // TODO: Implement query
+
+        } else if (args[0].equals(DataBasicCommands.HELP.toString())) {
+            help();
+
+        } else {
+            throw new RuntimeException("Error: Command not recognized");
+
+        }
 
     }
 
     /**
-     * Process inserted path to JSON file
-     * @param arg
+     * Shows help
      */
-    private void processInsert(String arg) {
+    void help() {
 
-        // Corner case: Provided file is empty ""
-        if (arg.isEmpty()) {
-            throw new RuntimeException("Error: The provided path is empty");
-            /*System.err.println("Error: The provided path is empty");
-            help();
-            return;*/
-        }
+        String insertCommand = makeBold(DataBasicCommands.INSERT.name() + " <path-to-file>") + "    Inserts an registry into databasic.";
+        String queryCommand = makeBold("<id> <json-path>") + "         Executes a query to databasic.";
+        String helpCommand = makeBold("help") + "                     Displays this help and exit";
 
-        new JacksonObjectMapper().processJSONFile(arg);
+        System.out.println("\nDatabasic");
+        System.out.println("-------------------");
+        System.out.println("Available commands are:");
+        System.out.println(java.util.Arrays.asList(DataBasicCommands.values()) + "\n");
+        System.out.println(insertCommand);
+        System.out.println(queryCommand);
+        System.out.println(helpCommand);
+        System.out.println("-------------------");
 
     }
 
-    public void processInput(String[] args) {
-        processInsert(args[1]);
+    /**
+     * Format text in bold
+     * @param s The string to bold
+     * @return The emboldened text
+     */
+    private String makeBold(String s) {
+        String boldedString = "\u001B[1m";
+        boldedString += s + "\u001B[0m";
+        return boldedString;
+
     }
+
+
 }

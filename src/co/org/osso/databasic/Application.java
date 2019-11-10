@@ -22,7 +22,6 @@ class Application{
         if (args[0].equals(DataBasicCommands.HELP.toString())) {
             help();
             return;
-
         }
 
         // Validate input, Handling all errors here

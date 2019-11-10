@@ -29,9 +29,9 @@ class Application implements ExceptionThrower{
     /*For throw this exception is needed or try catch block or put Exception in method*/
     public void e() {
         try {
-            throw new Exception();
+            throw new Exception("Exception here!");
         } catch (Exception e) {
-
+            System.err.println(e.getMessage());
         }
     }
 

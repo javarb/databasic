@@ -28,11 +28,15 @@ public class JacksonObjectMapper {
             e.printStackTrace();
             return;*/
         }
+        /*Por el momento lo unico que hace es abrir el archivo e imprimir esto*/
+        JsonNode personNode = rootNode.path("person");
+        System.out.println("personNode = " + personNode);
 
-        JsonNode nameNode = rootNode.path("name");
+        /*JsonNode nameNode = rootNode.path("name");
         JsonNode ageNode = rootNode.path("age");
         System.out.println("nameNode.asText() = " + nameNode.asText());
         System.out.println("ageNode.asInt() = " + ageNode.asInt());
+        */
     }
 
     /**
